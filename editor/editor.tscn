@@ -1,0 +1,238 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://img/dark_1.png" type="Texture" id=1]
+[ext_resource path="res://editor/editor.gd" type="Script" id=2]
+[ext_resource path="res://fonts/Roboto-Medium.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://icon.png" type="Texture" id=4]
+[ext_resource path="res://editor/grid.gd" type="Script" id=5]
+[ext_resource path="res://editor/font_1.tres" type="DynamicFont" id=6]
+[ext_resource path="res://editor/arrow.mesh" type="ArrayMesh" id=7]
+[ext_resource path="res://img/arrow.png" type="Texture" id=8]
+[ext_resource path="res://editor/Point.tscn" type="PackedScene" id=9]
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+font_data = ExtResource( 3 )
+
+[sub_resource type="MultiMesh" id=4]
+mesh = ExtResource( 7 )
+
+[node name="Editor" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 1280, 720 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="bg" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+texture = ExtResource( 1 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Margin" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+custom_constants/margin_right = 5
+custom_constants/margin_top = 5
+custom_constants/margin_left = 5
+custom_constants/margin_bottom = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="cols" type="HBoxContainer" parent="Margin"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1275.0
+margin_bottom = 715.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+custom_constants/separation = 5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Menue" type="PanelContainer" parent="Margin/cols"]
+margin_right = 180.0
+margin_bottom = 710.0
+rect_min_size = Vector2( 180, 0 )
+size_flags_horizontal = 5
+size_flags_vertical = 5
+
+[node name="Items" type="VBoxContainer" parent="Margin/cols/Menue"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 173.0
+margin_bottom = 703.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 10
+
+[node name="Title" type="Label" parent="Margin/cols/Menue/Items"]
+margin_right = 166.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 2 )
+text = "MAP Editor"
+align = 1
+
+[node name="Version" type="Label" parent="Margin/cols/Menue/Items/Title"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -25.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 3 )
+text = "v 0.0.1-alpha1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="grid1" type="HBoxContainer" parent="Margin/cols/Menue/Items"]
+margin_top = 60.0
+margin_right = 166.0
+margin_bottom = 84.0
+
+[node name="Label" type="Label" parent="Margin/cols/Menue/Items/grid1"]
+margin_right = 81.0
+margin_bottom = 24.0
+size_flags_horizontal = 7
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 6 )
+text = "Cols (x)"
+
+[node name="grid_cols" type="SpinBox" parent="Margin/cols/Menue/Items/grid1"]
+margin_left = 85.0
+margin_right = 166.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 2.0
+max_value = 128.0
+value = 2.0
+
+[node name="grid2" type="HBoxContainer" parent="Margin/cols/Menue/Items"]
+margin_top = 94.0
+margin_right = 166.0
+margin_bottom = 118.0
+
+[node name="Label" type="Label" parent="Margin/cols/Menue/Items/grid2"]
+margin_right = 81.0
+margin_bottom = 24.0
+size_flags_horizontal = 7
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 6 )
+text = "Rows (y)"
+
+[node name="grid_rows" type="SpinBox" parent="Margin/cols/Menue/Items/grid2"]
+margin_left = 85.0
+margin_right = 166.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 2.0
+max_value = 128.0
+value = 2.0
+
+[node name="create_button" type="Button" parent="Margin/cols/Menue/Items"]
+margin_top = 128.0
+margin_right = 166.0
+margin_bottom = 153.0
+custom_fonts/font = ExtResource( 6 )
+text = "create PosMap"
+
+[node name="Label2" type="Label" parent="Margin/cols/Menue/Items"]
+margin_top = 163.0
+margin_right = 166.0
+margin_bottom = 182.0
+size_flags_horizontal = 7
+size_flags_vertical = 5
+custom_fonts/font = ExtResource( 6 )
+text = "Rotation"
+
+[node name="rotation" type="HSlider" parent="Margin/cols/Menue/Items"]
+margin_top = 192.0
+margin_right = 166.0
+margin_bottom = 208.0
+max_value = 6.283
+step = 0.001
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="save_button" type="Button" parent="Margin/cols/Menue/Items"]
+margin_top = 218.0
+margin_right = 166.0
+margin_bottom = 243.0
+custom_fonts/font = ExtResource( 6 )
+text = "save PosMap"
+
+[node name="load_button" type="Button" parent="Margin/cols/Menue/Items"]
+margin_top = 253.0
+margin_right = 166.0
+margin_bottom = 278.0
+custom_fonts/font = ExtResource( 6 )
+text = "load PosMap"
+
+[node name="ViewContainer" type="ViewportContainer" parent="Margin/cols"]
+margin_left = 185.0
+margin_right = 1270.0
+margin_bottom = 710.0
+size_flags_horizontal = 7
+size_flags_vertical = 7
+
+[node name="Viewport" type="Viewport" parent="Margin/cols/ViewContainer"]
+size = Vector2( 100, 100 )
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Ref" type="Sprite" parent="Margin/cols/ViewContainer/Viewport"]
+texture = ExtResource( 4 )
+centered = false
+script = ExtResource( 5 )
+
+[node name="Camera" type="Camera2D" parent="Margin/cols/ViewContainer/Viewport"]
+current = true
+
+[node name="Arrows" type="MultiMeshInstance2D" parent="Margin/cols/ViewContainer/Viewport"]
+multimesh = SubResource( 4 )
+texture = ExtResource( 8 )
+
+[node name="Point" parent="Margin/cols/ViewContainer/Viewport" instance=ExtResource( 9 )]
+visible = false
+
+[node name="FileDialog" type="FileDialog" parent="."]
+margin_left = 82.0
+margin_top = 128.0
+margin_right = 697.0
+margin_bottom = 443.0
+window_title = "Datei speichern"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="value_changed" from="Margin/cols/Menue/Items/grid1/grid_cols" to="." method="_on_grid_cols_value_changed"]
+[connection signal="value_changed" from="Margin/cols/Menue/Items/grid2/grid_rows" to="." method="_on_grid_rows_value_changed"]
+[connection signal="pressed" from="Margin/cols/Menue/Items/create_button" to="." method="_on_create_button_pressed"]
+[connection signal="value_changed" from="Margin/cols/Menue/Items/rotation" to="." method="_on_rotation_value_changed"]
+[connection signal="pressed" from="Margin/cols/Menue/Items/save_button" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Margin/cols/Menue/Items/load_button" to="." method="_on_load_button_pressed"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
